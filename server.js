@@ -30,7 +30,7 @@ app.use(express.static(publicDirectory));
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended:false}));  //get data from forms and make it available in post method ko request ma
-app.use(express.json)   //form bata ako data lai json ma parse garxa
+app.use(express.json())   //form bata ako data lai json ma parse garxa
 
 //define all routes
 app.use('/', require('./routes/pages'))     

@@ -1,33 +1,61 @@
 tourist/normal user register form here
 
-<div class="container">
+<% if(typeof alert != 'undefined') { %>
+    <% alert.forEach(function(error) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= error.msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+    <% }) %>
+<% } %>
+
+
+<% if(typeof message != 'undefined') { %>
+    <% message.forEach(function(error) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= message.msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+    <% }) %>
+<% } %>
+
 <form action= "/auth/tourist_register" method ="POST" >
     <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" name ="username">
+        <input type="text" class="form-control" id="username" name ="username" required>
     </div>
 
     <div class="form-group">
         <label for="fname">First Name</label>
-        <input type="text" class="form-control" id="fname" name = "firstname">
+        <input type="text" class="form-control" id="fname" name = "firstname" required>
     </div>
 
     <div class="form-group">
         <label for="lname">Last Name</label>
-        <input type="text" class="form-control" id="lname" name = "lastname">
+        <input type="text" class="form-control" id="lname" name = "lastname" required>
     </div>
 
     <div class="form-group">
         <label for="email">email</label>
-        <input type="text" class="form-control" id="email" name = "email">
+        <input type="text" class="form-control" id="email" name = "email" required>
     </div>
 
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name = "password">
+        <input type="password" class="form-control" id="password" name = "password" required>
+    </div>
+
+    <div class="form-group">
+        <label for="passwordConfirm">Confirm Password</label>
+        <input type="password" class="form-control" id="passwordConfirm" name = "passwordConfirm" required>
     </div>
 
     <button type="submit" class="btn btn-primary">Register User</button>
-        
-    </form>
-</div>
+
+</form>
+   
+
