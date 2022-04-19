@@ -24,7 +24,8 @@ const db = mysql.createConnection({
 // });
 
 //for keeping the files of css 
-const publicDirectory = path.join(__dirname,'./public/css');
+
+const publicDirectory = path.join(__dirname,'./public');
 app.use(express.static(publicDirectory));
 
 
@@ -35,6 +36,10 @@ app.use(express.json())   //form bata ako data lai json ma parse garxa
 //define all routes
 app.use('/', require('./routes/pages'))     
 app.use('/auth', require('./routes/auth'))  //'/auth' paxi aako url yeta janxa .routes/auth
+
+// app.get('/login', function(req, res) {
+//     req.render('login')
+// });
 
 
 
