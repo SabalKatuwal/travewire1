@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const path =require('path');
 
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session)     //overwrite dot method
+
 //For protecting sensitive information
 const dotenv = require('dotenv');
 dotenv.config({path: './.env'}); 
@@ -23,6 +26,20 @@ db.connect((error)=>{
     }
 });
 
+//connection of session with database
+var sessionStore = new MySQLStore({
+    expiration:10800000,
+    createDatabaseTable: true,
+    schema:{
+        tableName: 'sessiontbl',
+        columnNames:{
+            session_id: 'session_id',
+            expires: 'expires',
+            data: 'data'
+        }
+    }
+},db);
+
 //for keeping the files of css 
 const publicDirectory = path.join(__dirname,'./public/css');
 app.use(express.static(publicDirectory));
@@ -31,6 +48,15 @@ app.use(express.static(publicDirectory));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended:false}));  //get data from forms and make it available in post method ko request ma
 app.use(express.json())   //form bata ako data lai json ma parse garxa
+app.use(
+    session({
+        key: 'keyin',
+        secret: "this is key that sign cookie",
+        store: sessionStore,
+        resave: false,
+        saveUninitialized: false,
+    })
+);
 
 //define all routes
 app.use('/', require('./routes/pages'))     

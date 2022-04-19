@@ -113,26 +113,40 @@ exports.tourist_register = (req,res)=> {
 
 exports.login = (req, res)=>{
     const {username, password } = req.body;
-
     (
         async function(){
             try{
                 const hashedPassword = await hashit(password);
-                console.log(hashedPassword);
-                console.log(req.body)
                 db.query('SELECT * FROM user WHERE username = ?',[username], async (error, results)=>{
                     if(error){
                         console.log(error);
                     }
-                    console.log(results);
-                    if(results){
-                        if(results.password = hashedPassword){
-                            return res.render('index')
-                        }  
+                    console.log('results',results,results.length);
+
+                    if(results.length>0){
+                        bcrypt.compare(req.body.password,results[0].passwords,(error,results)=>{
+                            if(error){
+                                console.log(error)
+                            }
+                            console.log('results = ',results)
+                            if(results){
+                                return res.redirect('/')
+                            }
+                            else{
+                                return res.redirect('/login')
+                            }
+                            
+                        })
+                    }else{
+                        return res.redirect('/login')
+
                     }
-                    else{
-                        return res.render('login');
-                    }
+                        // if(results.password == hashedPassword){
+                        //     //req.session.username = results.username
+                        //     return res.render('index',)
+                        // } 
+                    
+                    
                 })
             }
             catch(err){
