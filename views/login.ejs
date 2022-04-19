@@ -1,6 +1,98 @@
-login form
-if user then one form 
-if guide then another form
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com
+">
+        <link rel="preconnect" href="https://fonts.gstatic.com
+" crossorigin>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css
+">
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@100;200;300&display=swap
+" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/style.css"/>
+        <title>Signin and signup form</title>
+    </head>
+    <body>
+
+        <div class= "container">
+            <div class="forms-container">
+                <div class="signin-signup">
+                <form action="#" class="sign-in-form" method="post">
+                    <h2 class="title">Sign in</h2>
+                    <div class="input-field">
+                        <i class="fa fa-user icon"></i>
+                        <input type="text" placeholder="Username"> </div>
+                        <div class="input-field"><i class="fa fa-lock icon"></i>
+                            <input type="password" placeholder="Password"> 
+                        </div>
+                        <div class="text-center">
+                            <a href="#" class="text-primary fw-bold text-decoration-none">Forget Password</a>
+                        </div>
+                            <input type="submit" class="btn solid" value="login">
+                            <div class="text-center">Or</div>
+                                <a href="a" class="text-primary fw-bold text-decoration-none">
+                                    <img src="google/google-icon.svg" class="img-fluid me-3"> Continue with Google
+                                </a>
+
+                </form>
+
+                <form action="#" class="sign-up-form" method="post">
+                    <h2 class="title">Sign up</h2>
+
+                        <div class="input-field"><i class="fa fa-user icon"></i>
+                            <input type="text" placeholder="Full name" > </div>
+
+                        <div class="input-field"><i class="fa fa-user icon"></i>
+                            <input type="text" placeholder="Username"> </div>
+                        
+                        <div class="input-field"><i class="fa fa-envelope icon"></i>
+                            <input type="text" placeholder="Email"> </div>
+
+                        <div class="input-field"><i class="fa fa-lock icon"></i>
+                            <input type="password" placeholder="Password"> 
+                        </div>
+                        <div class="input-field"><i class="fa fa-lock icon"></i>
+                            <input type="password" placeholder="Confirm Password"> 
+                        </div>
+                        <input type="submit" class="btn solid" value="Sign up">
+                        <div class="text-center">Or</div>
+                            <a href="a" class="text-primary fw-bold text-decoration-none">
+                                <img src="google/google-icon.svg" class="img-fluid me-3"> Signup with Google
+                            </a>
+                </form>
+            </div>
+            </div>
+            
+
+            <div class="panels-container">
+                <div class="panel left-panel">
+                    <div class="content">
+                        <h3>New Here?</h3>
+                        <p>Hello! Welcome to Travewire.</p>
+                        <button class="btn transparent" id="sign-up-button">Sign Up</button>
+                    </div>
+                    <img src="#" class="image">
+                </div>
+
+                <div class="panel right-panel">
+                    <div class="content">
+                        <h3>One of Us?</h3>
+                        <p>Sign in to travel with us.</p>
+                        <button class="btn transparent" id="sign-in-button">Sign In</button>
+                    </div>
+                    <img src="#" class="image">
+                </div>
+            </div>
+    </div>
+    <script src="login.js"></script>
+    </body>
+</html>
+
+<!--register form-->
 
 
 <form action= "/auth/login" method ="POST" >
