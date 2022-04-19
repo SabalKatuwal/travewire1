@@ -6,6 +6,8 @@ const { name } = require('ejs');
 
 const {check, validationResult} = require('express-validator')
 
+const hashit= (passsword)=>bcrypt.hash(passsword,8);
+
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -85,7 +87,7 @@ exports.tourist_register = (req,res)=> {
             res.render('tourist_register', {alert})
         }
         else{
-            let hashedPassword = await bcrypt.hash(password, 8); //8 round to incript pw
+            let hashedPassword = await hashit(password);//bcrypt.hash(password, 8); //8 round to incript pw
 
             db.query('INSERT INTO user SET ?',{username: username,firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword }, (error, results)=>{
                 if(error){
@@ -98,9 +100,6 @@ exports.tourist_register = (req,res)=> {
             })
         }        
         
-
-        
-
     });
     
 
@@ -110,3 +109,37 @@ exports.tourist_register = (req,res)=> {
 // <% if(message) { %>
 //     <div class="alert alert-danger" role="alert"><%= message %></div>
 //     <% } %>
+
+
+exports.login = (req, res)=>{
+    const {username, password } = req.body;
+
+    (
+        async function(){
+            try{
+                const hashedPassword = await hashit(password);
+                console.log(hashedPassword);
+                console.log(req.body)
+                db.query('SELECT * FROM user WHERE username = ?',[username], async (error, results)=>{
+                    if(error){
+                        console.log(error);
+                    }
+                    console.log(results);
+                    if(results){
+                        if(results.password = hashedPassword){
+                            return res.render('index')
+                        }  
+                    }
+                    else{
+                        return res.render('login');
+                    }
+                })
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
+    )()
+
+}
+

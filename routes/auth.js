@@ -18,6 +18,8 @@ router.post('/tourist_register',[
         .normalizeEmail()
 ],authController.tourist_register)   
 
+router.post('/login',authController.login)
+
 
 
 
