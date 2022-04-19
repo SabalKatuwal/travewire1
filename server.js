@@ -9,19 +9,19 @@ dotenv.config({path: './.env'});
 //Connecting to mysql (make a database named Travewire)
 const mysql = require('mysql');
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'root',
     password: process.env.DATABASE,
     database: 'Travewire'
 });
-db.connect((error)=>{
-    if(error){
-        console.log(error);
-    }
-    else{
-        console.log('Connected to mysql...');
-    }
-});
+// db.connect((error)=>{
+//     if(error){
+//         console.log(error);
+//     }
+//     else{
+//         console.log('Connected to mysql...');
+//     }
+// });
 
 //for keeping the files of css 
 const publicDirectory = path.join(__dirname,'./public/css');
