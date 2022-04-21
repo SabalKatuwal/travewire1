@@ -7,18 +7,9 @@ router.get('/', (req, res)=>{
     res.render('index');
 });
 
-router.get('/login', (req, res)=>{
-    res.render('login.ejs');
-});
 
-router.get('/guide_register', (req, res)=>{
-    res.render('guide_register.ejs');
-});
-
-router.get('/tourist_register', (req, res)=>{
-    res.render('tourist_register');
-});
  
+
 
 
 

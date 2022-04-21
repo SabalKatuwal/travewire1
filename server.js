@@ -4,6 +4,7 @@ const path =require('path');
 
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session)     //overwrite dot method
+//var cookieParser = require('cookie-parser')
 
 //For protecting sensitive information
 const dotenv = require('dotenv');
@@ -29,7 +30,7 @@ db.connect((error)=>{
 //connection of session with database
 var sessionStore = new MySQLStore({
     expiration:10800000,
-    createDatabaseTable: true,
+    createDatabaseTable: false,
     schema:{
         tableName: 'sessiontbl',
         columnNames:{

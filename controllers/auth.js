@@ -4,7 +4,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { name } = require('ejs');
 
-const {check, validationResult} = require('express-validator')
+const {check, validationResult} = require('express-validator');
+const req = require('express/lib/request');
+const { render } = require('express/lib/response');
 
 const hashit= (passsword)=>bcrypt.hash(passsword,8);
 
@@ -95,7 +97,7 @@ exports.tourist_register = (req,res)=> {
                 }
                 else{
                     message.push('User Registered')
-                    return res.render('index',{message});
+                    return res.render('login',{message});
                 }
             })
         }        
@@ -130,6 +132,8 @@ exports.login = (req, res)=>{
                             }
                             console.log('results = ',results)
                             if(results){
+                                req.session.userinfo = username
+                                console.log(req.session.userinfo)
                                 return res.redirect('/')
                             }
                             else{
@@ -157,3 +161,24 @@ exports.login = (req, res)=>{
 
 }
 
+exports.logout = (req, res)=>{
+    // req.session.destroy(function(err){
+    //     if(!err){
+    //         console.log('successfully loggedout')
+    //         return res.redirect('/')  //{message:'logged Out'}
+    //     }
+    // })
+    if (req.session) {
+        req.session.destroy(err => {
+          if (err) {
+            console.log(err)
+          } 
+          else {
+            console.log('Logout successful')
+            return res.redirect('/')
+          }
+        });
+      } else {
+        res.end()
+      }
+}

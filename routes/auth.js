@@ -7,6 +7,22 @@ const authController = require('../controllers/auth') //to go one directory back
 
 
 
+
+router.get('/login', (req, res)=>{
+    res.render('login.ejs');
+});
+
+router.get('/guide_register', (req, res)=>{
+    res.render('guide_register.ejs');
+});
+
+router.get('/tourist_register', (req, res)=>{
+    res.render('tourist_register');
+});
+
+
+
+
 // router.post('/tourist_register',authController.tourist_register)   
 
 router.post('/tourist_register',[
@@ -20,7 +36,7 @@ router.post('/tourist_register',[
 
 router.post('/login',authController.login)
 
-
+router.get('/logout', authController.logout)
 
 
 
