@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
-const jwt = require('jsonwebtoken');
+//const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { name } = require('ejs');
 
@@ -143,8 +143,7 @@ exports.login = (req, res)=>{
                         })
                     }else{
                         return res.redirect('/login')
-
-                    }
+                  }
                         // if(results.password == hashedPassword){
                         //     //req.session.username = results.username
                         //     return res.render('index',)
@@ -160,14 +159,9 @@ exports.login = (req, res)=>{
     )()
 
 }
+  
 
 exports.logout = (req, res)=>{
-    // req.session.destroy(function(err){
-    //     if(!err){
-    //         console.log('successfully loggedout')
-    //         return res.redirect('/')  //{message:'logged Out'}
-    //     }
-    // })
     if (req.session) {
         req.session.destroy(err => {
           if (err) {
@@ -182,3 +176,67 @@ exports.logout = (req, res)=>{
         res.end()
       }
 }
+
+
+
+/*
+for guide
+*/
+
+exports.guide_register = (req,res)=> {
+
+    const {username, firstname, lastname, email, password, passwordConfirm } = req.body;
+    const errors = validationResult(req)
+
+        
+    if(!errors.isEmpty()) {
+        // return res.status(422).jsonp(errors.array())
+        const alert = errors.array()
+        res.render('tourist_register', {alert})
+    }
+    else{
+        let hashedPassword = bcrypt.hash(password, 8);  //await hashit(password); //8 round to incript pw
+
+        db.query('INSERT INTO guide SET ?',{username: username,firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword }, (error, results)=>{
+            if(error){
+                console.log(error);
+            }
+            else{
+                console.log('guide registered in database')
+                return res.render('guide_login');
+            }
+        })
+    }        
+}
+
+exports.guide_login = (req, res)=>{
+    const {username, password } = req.body;  
+    //const hashedPassword = await hashit(password);
+    db.query('SELECT * FROM guide WHERE username = ?',[username], async (error, results)=>{
+        if(error){
+            console.log(error);
+        }
+
+        if(results.length>0){
+            bcrypt.compare(req.body.password,results[0].passwords,(error,results)=>{
+                if(error){
+                    console.log(error)
+                }
+                if(results){
+                    req.session.userinfo = username
+                    console.log(req.session.userinfo)
+                    return res.redirect('/')
+                }
+                else{
+                    return res.redirect('/guide_login')
+                }
+                
+            })
+        }else{
+            return res.redirect('/guide_login')
+    }
+    })
+}
+            
+
+

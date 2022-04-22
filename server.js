@@ -61,10 +61,7 @@ app.use(
 
 //define all routes
 app.use('/', require('./routes/pages'))     
-app.use('/auth', require('./routes/auth'))  //'/auth' paxi aako url yeta janxa .routes/auth
-
-
-
+app.use('/auth', require('./routes/auth'))  //'/auth' paxi aako url yeta janxa
 
 const port = process.env.PORT || 3000;
 app.listen(port, ()=>{console.log(`listening on port ${port}`)});
