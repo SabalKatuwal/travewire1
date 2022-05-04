@@ -137,12 +137,12 @@ exports.login = (req, res)=>{
                                 return res.redirect('/')
                             }
                             else{
-                                return res.redirect('/login')
+                                return res.render('login')
                             }
                             
                         })
                     }else{
-                        return res.redirect('/login')
+                        return res.render('login')
                   }
                         // if(results.password == hashedPassword){
                         //     //req.session.username = results.username
@@ -185,19 +185,19 @@ for guide
 
 exports.guide_register = (req,res)=> {
 
-    const {username, firstname, lastname, email, password, passwordConfirm } = req.body;
+    const {username, firstname, lastname, email, password, passwordConfirm, citizenshipName, citizenshipNumber, contactNumber, guidePicture, address } = req.body;
     const errors = validationResult(req)
-
+    console.log(req.body)
         
     if(!errors.isEmpty()) {
         // return res.status(422).jsonp(errors.array())
         const alert = errors.array()
-        res.render('tourist_register', {alert})
+        res.render('guide_register', {alert})
     }
     else{
         let hashedPassword = bcrypt.hash(password, 8);  //await hashit(password); //8 round to incript pw
-
-        db.query('INSERT INTO guide SET ?',{username: username,firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword }, (error, results)=>{
+        console.log(hashedPassword)
+        db.query('INSERT INTO guide SET ?',{username: username,firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword, address:address, contactNumber:contactNumber, guidePicture:guidePicture, citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber }, (error, results)=>{
             if(error){
                 console.log(error);
             }
