@@ -1,4 +1,139 @@
-tourist/normal user register form here
+
+<%- include("header") -%>
+
+<div class="container">
+    <div class="py-5 text-center">
+        
+        <h2>Become a Guide</h2>
+        <p class="lead">Please fill out the form below.</p>
+    </div>
+
+    
+        <div class="col-md-12 order-md-1">
+            <h4 class="mb-3">Basic Information</h4>
+            <form class="needs-validation">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">First name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            Valid last name is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" class="form-control" id="username" placeholder="Username" required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your username is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="username">Password</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="password" placeholder="password" required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your password is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="username">Confirm Password</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="password" placeholder="password" required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your password confirmation is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="Eg: Butwal-8, Rupandehi" required>
+                    <div class="invalid-feedback">
+                        Please enter your shipping address.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address2">Contact Number</label>
+                    <input type="text" class="form-control" id="address2" placeholder="Eg: 9867227502">
+                </div>
+
+                <div class="mb-3">
+                    <label for="picture">Upload your Picture:</label>
+                    <input type="file" class="img-upload-btn" id="picture">
+                </div>
+
+                
+                <hr class="mb-4">
+
+                <h4 class="mb-3">Verification</h4>
+
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked
+                            required>
+                        <label class="custom-control-label" for="credit">Citizenship Certificate</label>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-name">Name on your Certificate</label>
+                        <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                        <small class="text-muted">Full name as displayed on certificate</small>
+                        <div class="invalid-feedback">
+                            Name on card is required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-number">Citizenship number</label>
+                        <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Citizenship number is required
+                        </div>
+                    </div>
+                </div>
+                
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+<%- include('footer') -%>
+
+
+
+
+
+
+
+<!-- tourist/normal user register form here
 <% if(typeof alert != 'undefined') { %>
     <% alert.forEach(function(error) { %>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -20,9 +155,9 @@ tourist/normal user register form here
             </button>
           </div>
     <% }) %>
-<% } %>
+<% } %> -->
 
-<form action= "/auth/tourist_register" method ="POST" >
+<!-- <form action= "/auth/tourist_register" method ="POST" >
     <div class="form-group">
         <label for="username">Username</label>
         <input type="text" class="form-control" id="username" name ="username" required>
@@ -56,5 +191,5 @@ tourist/normal user register form here
     <button type="submit" class="btn btn-primary">Register User</button>
 
 </form>
-   
+    -->
 

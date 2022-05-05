@@ -42,8 +42,9 @@ var sessionStore = new MySQLStore({
 },db);
 
 // //for keeping the files of css 
-const publicDirectory = path.join(__dirname,'./public/css');
-app.use(express.static(publicDirectory));
+// const publicDirectory = path.join(__dirname,'./public/css');
+// app.use(express.static(publicDirectory));
+app.use(express.static("public"));
 
 
 app.set('view engine', 'ejs');

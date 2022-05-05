@@ -7,6 +7,38 @@ router.get('/', (req, res)=>{
 });
 
 
+// to be removed by me
+router.get('/place_upload', (req, res)=>{
+    console.log(req.session.username);
+    res.render('place_upload');
+});
+
+router.get('/site_detail', (req, res)=>{
+    console.log(req.session.username);
+    res.render('site_detail');
+});
+
+router.get('/contact', (req, res)=>{
+    console.log(req.session.username);
+    res.render('contact');
+});
+
+router.get('/about', (req, res)=>{
+    console.log(req.session.username);
+    res.render('about');
+});
+
+router.get('/search', (req, res)=>{
+    console.log(req.session.username);
+    res.render('search_result');
+});
+
+router.get('/profile', (req, res)=>{
+    console.log(req.session.username);
+    res.render('user_profile');
+});
+
+
  
 
 
