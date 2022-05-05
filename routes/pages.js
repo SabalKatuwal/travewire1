@@ -13,6 +13,10 @@ router.get('/place_upload', (req, res)=>{
     res.render('place_upload');
 });
 
+router.get('/:site_id', (req, res)=>{
+    res.send(req.params)
+})
+
 
 
 router.post('/place_upload',pageController.place_upload) 
