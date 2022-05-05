@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <a href='/auth/logout' >Logout</a>
 <html lang="en">
 <head>
@@ -25,11 +25,74 @@
             <h2><%= site.name %></h2>
             <p><%= site.description %></p>
             <a href = "#">Read More</a>
-            </div>
-        <hr>  
+            </div> 
     <% })  %>
     
 
 </body>
 </html>
+ -->
 
+
+
+<!-- this is upper part -->
+
+
+
+
+<%- include("header") -%>
+    <header>
+        <div class="banner">
+            <div class="container">
+                <h1 class="banner-title">
+                    <span>The World is a Book</span>
+                </h1>
+                <p>and those who donot travel read only one page...</p>
+                <form method="#">
+                    <input type="text" class="search-input" placeholder="Where to?">
+                    <button type="submit" class="home-search-btn my-2">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <!-- end of header -->
+
+    <h1><%= user.firstname %></h1>
+
+    <!-- blog -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="title">
+                <h2>Latest Blog</h2>
+                <p>Recent Blogs Aubot Travel Sites by Guides</p>
+            </div>
+            <div class="blog-content">
+
+                <% siteinfo.forEach((site)=>{ %>
+                    <div class="blog-item">
+                        <div class="blog-img">
+                            <img src="images/swayambhunath.jpg" alt="">
+                        </div>
+                        <div class="blog-text">
+                            <span><%= site.created %></span>
+                            <h2>
+                                <%= site.name %>
+                            </h2>
+                            <p>
+                                <%= site.description %>
+                            </p>
+                            <a href="/detail/<%= site.site_id%>">Read More</a>
+                        </div>
+                        
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+    <!-- end of blog -->
+
+    <%- include("footer") -%>
+
+        <a href="auth/tourist_register">Register User</a>

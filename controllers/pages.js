@@ -22,7 +22,9 @@ exports.place_upload = (req,res)=> {
 
         if (results.length > 0 ){
             message.push('The site is already registered')
-            return res.render('place_upload',{message});
+            if(req.session.userinfo.isguide){
+                return res.render('place_upload',{message});
+            }
         }
         else{
             db.query('INSERT INTO site SET ?',{name: site_name,description: description, picture: picture}, (error, results)=>{
@@ -46,8 +48,9 @@ exports.index = (req,res)=> {
             console.log(error);
         }
         else{
-            console.log(req.session.username);
-            res.render('index', {siteinfo})
+
+            console.log(req.session.userinfo);
+            return res.render('index', {siteinfo, user:req.session.userinfo})
         }
                  
     })
@@ -55,13 +58,30 @@ exports.index = (req,res)=> {
 
 
 exports.detail_view = (req,res)=> {
-    const id = req.params.id
+    const id = req.params.site_id
+    console.log(req.params)
     db.query("select * from site where site_id = ?", [id],(error, site)=>{
         if(error){
             console.log(error)
         }
         else{
-            res.render('site_detail.ejs', {site})
+            console.log(site)
+            return res.render('site_detail', {site:site[0]})
+        }
+    })
+};
+
+
+exports.return_places = (req,res)=> {
+    db.query("select name from site",(error, results)=>{
+        if(error){
+            console.log(error)
+        }
+        else{
+            
+            return res.json(results)
+            
+
         }
     })
 };

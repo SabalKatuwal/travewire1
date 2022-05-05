@@ -1,7 +1,7 @@
-//not done now
+<%- include("header") -%>
 
 <div class="container-fluid whole-container">
-    <h1 class="main-header">Kathmandu University</h1>
+    <h1 class="main-header"><%= site.name %> <span><button type="button" class="btn btn-light fav-btn">Favourite <i class = "far fa-heart"></i></button></span></h1>
     <h4 class="sub-header">📍 28 Kilo, Dhulikhel</h4>
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -53,6 +53,7 @@
         necessitatibus, ut perspiciatis, doloribus rem voluptates quo minima deserunt adipisci cupiditate atque
         possimus? Omnis, eveniet.
     </p>
+
 
     <h5 class="accomodate"><i class="fa-thin fa-location-dot"></i>Nearest Accomodations</h5>
 
@@ -114,3 +115,5 @@
 
 
 </div>
+
+<%- include("footer") -%>

@@ -14,11 +14,15 @@ router.get('/place_upload', (req, res)=>{
     res.render('place_upload');
 });
 
-router.get('/:site_id', pageController.detail_view);
+
     
+router.get('/return_places', pageController.return_places);
 
+router.get('/about_us', (req, res)=>{
+    return redirect ("/about")
+});
 
-
+router.get('/detail/:site_id', pageController.detail_view);
 
 router.post('/place_upload',pageController.place_upload) 
 

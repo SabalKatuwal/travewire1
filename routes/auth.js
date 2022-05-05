@@ -54,17 +54,14 @@ router.post('/guide_register',[
     check('citizenshipNumber', 'Invalid citizenship number')
         .exists()
         .isLength(14),
-    check('email', 'Email is not valid')
-        .isEmail()
-        .normalizeEmail(),
-    check("passwordConfirm")     
-        .custom((value,{req}) =>{
-            if(value !== req.body.password){
-                throw new Error('Password confirmation does not match with password')
-            }
-            return true;
-        }
-        ).withMessage("Email already taken"),
+    // check("passwordConfirm")     
+    //     .custom((value,{req}) =>{
+    //         if(value !== req.body.password){
+    //             throw new Error('Password confirmation does not match with password')
+    //         }
+    //         return true;
+    //     }
+    //     ).withMessage("Email already taken"),
     
 ],authController.guide_register) 
 

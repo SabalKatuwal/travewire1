@@ -118,8 +118,10 @@ exports.login = (req, res)=>{
     (
         async function(){
             try{
+                let formula
                 const hashedPassword = await hashit(password);
                 db.query('SELECT * FROM user WHERE username = ?',[username], async (error, results)=>{
+                    formula = results[0]
                     if(error){
                         console.log(error);
                     }
@@ -132,7 +134,9 @@ exports.login = (req, res)=>{
                             }
                             console.log('results = ',results)
                             if(results){
-                                req.session.userinfo = username
+                                
+                                req.session.userinfo = formula
+                                console.log("results=",formula)
                                 console.log(req.session.userinfo)
                                 return res.redirect('/')
                             }
@@ -185,7 +189,7 @@ for guide
 
 exports.guide_register = (req,res)=> {
 
-    const {username, firstname, lastname, email, password, passwordConfirm, citizenshipName, citizenshipNumber, contactNumber, guidePicture, address } = req.body;
+    const { citizenshipName, citizenshipNumber, contactNumber, guidePicture, address, isguide } = req.body;
     const errors = validationResult(req)
     console.log(req.body)
         
@@ -195,15 +199,13 @@ exports.guide_register = (req,res)=> {
         res.render('guide_register', {alert})
     }
     else{
-        let hashedPassword = bcrypt.hash(password, 8);  //await hashit(password); //8 round to incript pw
-        console.log(hashedPassword)
-        db.query('INSERT INTO guide SET ?',{username: username,firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword, address:address, contactNumber:contactNumber, guidePicture:guidePicture, citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber }, (error, results)=>{
+        db.query('INSERT INTO guide SET ?',{address:address, contactNumber:contactNumber, guidePicture:guidePicture, citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber, isguide:isguide }, (error, results)=>{
             if(error){
                 console.log(error);
             }
             else{
                 console.log('guide registered in database')
-                return res.render('guide_login');
+                return res.redirect('/');
             }
         })
     }        
