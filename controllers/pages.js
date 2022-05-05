@@ -53,4 +53,15 @@ exports.index = (req,res)=> {
     })
 };
 
-    
+
+exports.detail_view = (req,res)=> {
+    const id = req.params.id
+    db.query("select * from site where site_id = ?", [id],(error, site)=>{
+        if(error){
+            console.log(error)
+        }
+        else{
+            res.render('site_detail.ejs', {site})
+        }
+    })
+};

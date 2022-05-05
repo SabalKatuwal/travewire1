@@ -1,3 +1,4 @@
+const { decodeBase64 } = require('bcryptjs');
 const express = require('express');
 const router = express.Router();
 const pageController = require('../controllers/pages'); 
@@ -13,9 +14,9 @@ router.get('/place_upload', (req, res)=>{
     res.render('place_upload');
 });
 
-router.get('/:site_id', (req, res)=>{
-    res.send(req.params)
-})
+router.get('/:site_id', pageController.detail_view);
+    
+
 
 
 
