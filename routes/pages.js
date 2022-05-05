@@ -1,11 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const pageController = require('../controllers/pages'); 
 
-router.get('/', (req, res)=>{
-    console.log(req.session.username);
-    res.render('index');
+
+router.get('/', pageController.index//(req, res)=>{
+    //console.log(req.session.username);
+    //res.render('index');
+//}
+);
+
+router.get('/place_upload', (req, res)=>{
+    res.render('place_upload');
 });
 
+
+
+router.post('/place_upload',pageController.place_upload) 
 
  
 

@@ -13,6 +13,23 @@
     <h1>Home Page</h1>
     <h3>Under construction</h3>
     <a href = "auth/tourist_register">Register User</a>
+    
+    
+    <% siteinfo.forEach((site) =>{ %> 
+        <div class = "blog-item">
+            <div class = "blog-img">
+            <img src = "images/swayambhunath.jpg" alt = "">
+            </div>
+            <div class = "blog-text">
+            <span>20 January, 2020</span>
+            <h2><%= site.name %></h2>
+            <p><%= site.description %></p>
+            <a href = "#">Read More</a>
+            </div>
+        <hr>  
+    <% })  %>
+    
+
 </body>
 </html>
 

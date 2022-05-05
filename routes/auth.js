@@ -28,6 +28,10 @@ router.get('/tourist_register', (req, res)=>{
 router.get('/logout', authController.logout)
 
 
+router.get('place_uplaod',(req,res)=>{
+    res.render('place_upload')
+});
+
 /*
     POST Method here
 */
@@ -65,6 +69,8 @@ router.post('/guide_register',[
 ],authController.guide_register) 
 
 router.post('/guide_login',authController.guide_login)
+
+
 
 
 module.exports = router; 
