@@ -19,14 +19,22 @@ router.get('/place_upload', (req, res)=>{
 router.get('/return_places', pageController.return_places);
 
 router.get('/about_us', (req, res)=>{
-    return redirect ("/about")
+    return res.render("about")
 });
+
+router.get('/contact_us', (req, res)=>{
+    res.render('contact');
+});
+
+
 
 router.get('/detail/:site_id', pageController.detail_view);
 
 router.post('/place_upload',pageController.place_upload) 
 
- 
+router.post('/contact_us', pageController.contact_us);
+
+
 
 
 

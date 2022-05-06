@@ -33,9 +33,9 @@
     <link rel="icon" href="/docs/4.6/assets/img/favicons/favicon.ico">
     <meta name="msapplication-config" content="/docs/4.6/assets/img/favicons/browserconfig.xml">
     <meta name="theme-color" content="#563d7c">
-<!-- fontawesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 
+<!-- fontawesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,7 +46,9 @@
         href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100&display=swap"
         rel="stylesheet">
 
-
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="/css/formMap.css">
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
     <!-- Custom styles for this template -->
     <!-- <link rel="stylesheet" href="../public/css/style.css"> -->
 </head>
@@ -55,21 +57,28 @@
 
     <nav class="navbar-items">
         <div class="logo">
-            <h4>Travewire</h4>
+            <a href="/" style="text-decoration: none; color: white;"><h4>Travewire</h4></a>
         </div>
 
         <ul class="nav-links">
             <li><a href="/">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/about_us">About</a></li>
+            <li><a href="/contact_us">Contact</a></li>
+            <li><a href="/auth/login"><button type="button" class="btn btn-info btn-sm">Login</button></a></li>
+            <li><a href="/auth/tourist_register"><button type="button" class="btn btn-light btn-sm">Register</button></a></li>
+            
             <!-- <li><button class="btn btn-sm btn-primary">Log In</button></li>
             <li><button class="btn btn-sm btn-light">Register</button></li> -->
         </ul>
 
-        <form class="form-inline">
+        <!-- <form class="form-inline">
             <input class="bg-light search-box form-control-sm mr-sm-2" type="search" placeholder="Where to?" aria-label="Search">
             <button class="search-btn btn btn-sm btn-outline-secondary my-2 my-sm-0" type="submit">Find</button>
-        </form>
+        </form> -->
+
+        <ul class="nav-links" style="width: 0;">
+            <li><a href="/auth/profile" style="border: 1px solid paleturquoise; width: 40px; height: 30px; display: inline-block; text-align: center; border-radius: 50%; font-size: 1.2rem;">P</a></li>
+        </ul>
 
         <div class="burger">
             <div class="line1"></div>
@@ -77,3 +86,6 @@
             <div class="line3"></div>
         </div>
     </nav>
+
+
+    

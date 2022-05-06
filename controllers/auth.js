@@ -137,7 +137,7 @@ exports.login = (req, res)=>{
                                 
                                 req.session.userinfo = formula
                                 console.log("results=",formula)
-                                console.log(req.session.userinfo)
+                                console.log("session= ",req.session.userinfo)
                                 return res.redirect('/')
                             }
                             else{
@@ -188,7 +188,8 @@ for guide
 */
 
 exports.guide_register = (req,res)=> {
-
+    const id = req.session.userinfo.user_id
+    console.log(id)
     const { citizenshipName, citizenshipNumber, contactNumber, guidePicture, address, isguide } = req.body;
     const errors = validationResult(req)
     console.log(req.body)
@@ -199,7 +200,7 @@ exports.guide_register = (req,res)=> {
         res.render('guide_register', {alert})
     }
     else{
-        db.query('INSERT INTO guide SET ?',{address:address, contactNumber:contactNumber, guidePicture:guidePicture, citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber, isguide:isguide }, (error, results)=>{
+        db.query('INSERT INTO guide SET ?',{userID:id ,address:address, contactNumber:contactNumber, guidePicture:guidePicture, citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber, isguide:isguide }, (error, results)=>{
             if(error){
                 console.log(error);
             }
@@ -241,4 +242,21 @@ exports.guide_login = (req, res)=>{
 }
             
 
+exports.profile = (req,res)=> {
+    console.log(req.session)
+    let isguide = req.session.userinfo.isGuide
+    if(req.session){
+        if(isguide){
+            return res.render('user_profile')
+        }
+        else{
+            console.log("normal user")
+        }
+
+    }
+    else{
+        console.log("login first")
+    }
+      
+}
 

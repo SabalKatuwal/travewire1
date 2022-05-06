@@ -28,9 +28,8 @@ router.get('/tourist_register', (req, res)=>{
 router.get('/logout', authController.logout)
 
 
-router.get('place_uplaod',(req,res)=>{
-    res.render('place_upload')
-});
+router.get('/profile',authController.profile)//(req,res)=>{
+    //res.render('user_profile')
 
 /*
     POST Method here

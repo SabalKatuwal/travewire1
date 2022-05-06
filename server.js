@@ -1,11 +1,17 @@
 const express = require('express');
 const app = express();
 const path =require('path');
+var cors = require('cors')
+
+var bodyParser = require('body-parser')
 
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session)     //overwrite dot method
 //var cookieParser = require('cookie-parser')
 
+
+
+// app.use(bodyParser.json());
 //For protecting sensitive information
 const dotenv = require('dotenv');
 dotenv.config({path: './.env'}); 
@@ -43,6 +49,7 @@ var sessionStore = new MySQLStore({
 
 //for keeping the files of css 
 app.use(express.static("public"));
+app.use(cors())
 
 
 app.set('view engine', 'ejs');
@@ -62,7 +69,9 @@ app.use(
 app.use('/', require('./routes/pages'))     
 app.use('/auth', require('./routes/auth'))  //'/auth' paxi aako url yeta janxa
 
-const port = process.env.PORT || 3000;
+
+
+const port = process.env.PORT || 3001;
 app.listen(port, ()=>{console.log(`listening on port ${port}`)});
 
 

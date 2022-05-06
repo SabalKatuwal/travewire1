@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const {check, validationResult} = require('express-validator');
+const e = require('express');
 
 
 const db = mysql.createConnection({
@@ -12,6 +13,8 @@ const db = mysql.createConnection({
 
 exports.place_upload = (req,res)=> {
     console.log(req.body);
+
+
     var message = []
     const {site_name, description, picture } = req.body;
     //const errors = validationResult(req)
@@ -33,7 +36,8 @@ exports.place_upload = (req,res)=> {
                 }
                 else{
                     console.log('registered travel site')
-                    return res.redirect('/');
+                    return res.json({success : 1});
+                    // return res.redirect('/');
                 }
             })
         }          
@@ -82,6 +86,20 @@ exports.return_places = (req,res)=> {
             return res.json(results)
             
 
+        }
+    })
+};
+
+
+exports.contact_us = (req,res)=> {
+    const {name, email, message} = req.body
+    db.query('INSERT INTO contact_us SET ?',{name: name, email:email, message:message}, (error, results)=>{
+        if(error){
+            console.log(error);
+        }
+        else{
+            console.log('your response is registered')
+            return res.redirect('/');
         }
     })
 };
