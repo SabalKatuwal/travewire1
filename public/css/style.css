@@ -233,6 +233,7 @@ text-align: center;
 .about-desc {
 padding: 0 8% 0 8%;
 justify-content: center;
+text-align: justify;
 }
 
 /* Search Result CSS */
@@ -244,4 +245,72 @@ text-align: center;
 .search-res {
 padding: 0 15% 0 15%;
 
+}
+
+
+
+
+
+/* normal user OR tourist profile css */
+
+.column1 {
+  margin: 20px;
+  padding: 10px;
+  width: auto
+  
+}
+
+.user_card {
+  height: auto;
+  width: 800px;
+  margin: auto;
+  padding: 0px;
+  align-items: center;
+  border: 3px solid lightgray;
+}
+
+
+.profile {
+  background-color: white;
+  margin-left: 15px;
+  display: block;
+  align-items: center;
+  font-size: large;
+  font-weight: bold;
+}
+
+.aayam_picture {
+  display: flex;
+  align-items: center;
+  border-top: 70px solid rgb(11, 141, 247);
+}
+
+  .aayam_picture img {
+      border-style:groove;
+      
+      height: 150px;
+      width: 150px;;
+      margin-top: -30px;
+      border-radius: 50%;
+      
+  }
+
+.profile_graphics {
+  display: flex;
+  margin: 5px;
+  align-items: center;
+  
+}
+
+.column-container {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding: 10px;
+
+}
+
+
+#name {
+  font-size: 26px;
 }

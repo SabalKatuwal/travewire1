@@ -12,38 +12,43 @@ const db = mysql.createConnection({
 });
 
 exports.place_upload = (req,res)=> {
-    console.log(req.body);
-
-
+    console.log(req.files,req.body);
     var message = []
-    const {site_name, description, picture } = req.body;
+    const {site_name, description, picture, district } = req.body;
     //const errors = validationResult(req)
-    db.query('SELECT name FROM site WHERE name = ?',[site_name], async (error, results)=>{
+    
+    
+    db.query('INSERT INTO site SET ?',{name: site_name,description: description, district:district}, (error, results)=>{
+        console.log(results)
         if(error){
             console.log(error);
         }
+        else
+        {
 
-        if (results.length > 0 ){
-            message.push('The site is already registered')
-            if(req.session.userinfo.isguide){
-                return res.render('place_upload',{message});
-            }
-        }
-        else{
-            db.query('INSERT INTO site SET ?',{name: site_name,description: description, picture: picture}, (error, results)=>{
-                if(error){
-                    console.log(error);
-                }
-                else{
-                    console.log('registered travel site')
-                    return res.json({success : 1});
-                    // return res.redirect('/');
-                }
+            db.query("select * from site where site_id = ?", [results.insertId],(error, site)=>{
+                req.files.forEach(file=>{
+                    db.query('INSERT INTO site_images SET ?',{siteID:site[0].site_id, path:file.path}, (error, results)=>{
+                        if(error){
+                            console.log(error);
+                        }
+                        else{
+                            console.log('image stavbesdd')
+                            // return res.redirect('/');
+                        }
+                    })
+                })
+                console.log('registered travel site')
+                return res.json({success : 1});
+                // return res.redirect('/')
             })
-        }          
-    })
-};
 
+            
+        }
+    
+    })
+                  
+};
 
 exports.index = (req,res)=> {
 
@@ -52,8 +57,24 @@ exports.index = (req,res)=> {
             console.log(error);
         }
         else{
+            // console.log(siteinfo)
+            // console.log(req.session.userinfo);
+            const data = [];
+            siteinfo.forEach(site => {
+                console.log('inside for')
+                let siteData = {}
+                siteData.site = site;
 
-            console.log(req.session.userinfo);
+                db.query('SELECT * FROM site_images where siteID = ?',[site.site_id], (error, images)=>{
+                    console.log('getting images')
+                    
+                })
+                
+                console.log('pushing site data to data');
+                data.push(siteData)
+                
+            })
+            // console.log('data = ',data);
             return res.render('index', {siteinfo, user:req.session.userinfo})
         }
                  
@@ -69,8 +90,12 @@ exports.detail_view = (req,res)=> {
             console.log(error)
         }
         else{
+            console.log('site',site)
+            // db.query('select * from accomodations where district = ?',[site.district],(err,accomodations) => {
+            //     console.log(accomodations);
+            // })
             console.log(site)
-            return res.render('site_detail', {site:site[0]})
+            // return res.render('site_detail', {site:site[0]})
         }
     })
 };

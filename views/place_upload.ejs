@@ -2,9 +2,7 @@
 
 <div class="container">
     <div class="py-5 text-center">
-        
         <h2>Upload a Place</h2>
-    
     </div>
 
     
@@ -18,6 +16,15 @@
                             Valid place name is required.
                         </div>
                     </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label for="placeName">district</label>
+                        <input type="text" class="form-control" id="district" placeholder="" value="" required name = "district">
+                        <div class="invalid-feedback">
+                            Valid district name is required.
+                        </div>
+                    </div>
+
             
                 </div>
 
@@ -32,7 +39,7 @@
 
                 <div class="mb-3">
                     <label for="picture">Upload Pictures:</label>
-                    <input type="file" class="img-upload-btn" id="picture" name = "picture">
+                    <input type="file" class="img-upload-btn" multiple id="picture" name = "picture">
                 </div>
 
                 <hr class="mb-4">

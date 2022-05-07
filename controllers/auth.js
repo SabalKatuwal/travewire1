@@ -190,7 +190,7 @@ for guide
 exports.guide_register = (req,res)=> {
     const id = req.session.userinfo.user_id
     console.log(id)
-    const { citizenshipName, citizenshipNumber, contactNumber, guidePicture, address, isguide } = req.body;
+    const { citizenshipName, citizenshipNumber, contactNumber, guidePicture, address, isguide , district} = req.body;
     const errors = validationResult(req)
     console.log(req.body)
         
@@ -200,13 +200,13 @@ exports.guide_register = (req,res)=> {
         res.render('guide_register', {alert})
     }
     else{
-        db.query('INSERT INTO guide SET ?',{userID:id ,address:address, contactNumber:contactNumber, guidePicture:guidePicture, citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber, isguide:isguide }, (error, results)=>{
+        db.query('INSERT INTO guide SET ?',{userID:id ,address:address, contactNumber:contactNumber, guidePicture:guidePicture, citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber, isguide:isguide , district:district}, (error, results)=>{
             if(error){
                 console.log(error);
             }
             else{
                 console.log('guide registered in database')
-                return res.redirect('/');
+                return res.redirect('/');  
             }
         })
     }        
@@ -250,12 +250,12 @@ exports.profile = (req,res)=> {
             return res.render('user_profile')
         }
         else{
-            console.log("normal user")
+            return res.render('tourist_profile')
         }
 
     }
     else{
-        console.log("login first")
+        console.log("not registered")
     }
       
 }
