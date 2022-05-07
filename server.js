@@ -16,21 +16,34 @@ const dotenv = require('dotenv');
 dotenv.config({path: './.env'}); 
 
 //Connecting to mysql (make a database named Travewire)
-const mysql = require('mysql');
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: process.env.DATABASE,
-    database: 'Travewire'
-});
-db.connect((error)=>{
-    if(error){
-        console.log(error);
-    }
-    else{
-        console.log('Connected to mysql...');
-    }
-});
+const mysql = require('mysql2/promise');
+
+let db;
+
+async function connectMysql(){
+     try{
+        db = await mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: process.env.DATABASE,
+            database: 'Travewire'
+        });
+        console.log('connected')
+     }catch(err){
+         console.log(err);
+     }
+}
+
+connectMysql();
+
+// db.connect((error)=>{
+//     if(error){
+//         console.log(error);
+//     }
+//     else{
+//         console.log('Connected to mysql...');
+//     }
+// });
 
 //connection of session with database
 var sessionStore = new MySQLStore({

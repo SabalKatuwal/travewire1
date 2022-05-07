@@ -1,15 +1,24 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2/promise');
+
 const {check, validationResult} = require('express-validator');
 const e = require('express');
+let db;
+async function connectMysql(){
+    try{
+       db = await mysql.createConnection({
+           host: 'localhost',
+           user: 'root',
+           password: process.env.DATABASE,
+           database: 'Travewire'
+       });
+       console.log('connected')
+    }catch(err){
+        console.log(err);
+    }
+}
 
-
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: process.env.DATABASE,
-    database: 'Travewire'
-});
+connectMysql()
 
 exports.place_upload = (req,res)=> {
     console.log(req.files,req.body);
@@ -18,67 +27,67 @@ exports.place_upload = (req,res)=> {
     //const errors = validationResult(req)
     
     
-    db.query('INSERT INTO site SET ?',{name: site_name,description: description, district:district}, (error, results)=>{
-        console.log(results)
-        if(error){
-            console.log(error);
-        }
-        else
-        {
+    // db.query('INSERT INTO site SET ?',{name: site_name,description: description, district:district}, (error, results)=>{
+    //     console.log(results)
+    //     if(error){
+    //         console.log(error);
+    //     }
+    //     else
+    //     {
 
-            db.query("select * from site where site_id = ?", [results.insertId],(error, site)=>{
-                req.files.forEach(file=>{
-                    db.query('INSERT INTO site_images SET ?',{siteID:site[0].site_id, path:file.path}, (error, results)=>{
-                        if(error){
-                            console.log(error);
-                        }
-                        else{
-                            console.log('image stavbesdd')
-                            // return res.redirect('/');
-                        }
-                    })
-                })
-                console.log('registered travel site')
-                return res.json({success : 1});
-                // return res.redirect('/')
-            })
+    //         db.query("select * from site where site_id = ?", [results.insertId],(error, site)=>{
+    //             req.files.forEach(file=>{
+    //                 db.query('INSERT INTO site_images SET ?',{siteID:site[0].site_id, path:file.path}, (error, results)=>{
+    //                     if(error){
+    //                         console.log(error);
+    //                     }
+    //                     else{
+    //                         console.log('image stavbesdd')
+    //                         // return res.redirect('/');
+    //                     }
+    //                 })
+    //             })
+    //             console.log('registered travel site')
+    //             return res.json({success : 1});
+    //             // return res.redirect('/')
+    //         })
 
             
-        }
+    //     }
     
-    })
+    // })
                   
 };
 
 exports.index = (req,res)=> {
-
-    db.query('SELECT * FROM site', (error, siteinfo)=>{
-        if(error){
-            console.log(error);
-        }
-        else{
-            // console.log(siteinfo)
-            // console.log(req.session.userinfo);
-            const data = [];
-            siteinfo.forEach(site => {
-                console.log('inside for')
-                let siteData = {}
-                siteData.site = site;
-
-                db.query('SELECT * FROM site_images where siteID = ?',[site.site_id], (error, images)=>{
-                    console.log('getting images')
-                    
+    (
+        async function(){
+            try{
+                const [rows, fields] = await db.execute('SELECT * FROM site');
+                // console.log('rows = ',rows)
+                const data = [];
+                rows.forEach(site => {
+                    (
+                        async function(){
+                            let siteData = {};
+                            siteData.site = site;
+                            const [rows, fields] = await db.execute('SELECT * FROM site_images where siteID = ?',[site.site_id]);
+                            const images = rows;
+                            console.log('images = ',images)
+                            console.log('setting images')
+                            siteData.images = images;
+                            data.push(siteData);
+                            console.log('data = ',data)
+                            return res.render('index',{data:data, user:req.session.userinfo})  
+                        }
+                        )()
                 })
-                
-                console.log('pushing site data to data');
-                data.push(siteData)
-                
-            })
-            // console.log('data = ',data);
-            return res.render('index', {siteinfo, user:req.session.userinfo})
+            }catch(err){
+                console.log('error',err)
+            }
         }
-                 
-    })
+    )()
+
 };
 
 
