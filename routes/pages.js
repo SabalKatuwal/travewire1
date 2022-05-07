@@ -42,6 +42,9 @@ router.get('/contact_us', (req, res)=>{
     res.render('contact');
 });
 
+router.get('/search_result', (req,res)=>{
+  return res.render('search_result')
+});
 
 
 router.get('/detail/:site_id', pageController.detail_view);
@@ -49,6 +52,15 @@ router.get('/detail/:site_id', pageController.detail_view);
 router.post('/place_upload',upload.array('picture',12),pageController.place_upload) 
 
 router.post('/contact_us', pageController.contact_us);
+
+
+
+
+
+router.post("/search_result",pageController.search_result)
+  
+
+  
 
 
 

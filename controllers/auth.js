@@ -246,7 +246,7 @@ exports.profile = (req,res)=> {
     console.log(req.session)
     let isguide = req.session.userinfo.isGuide
     if(req.session){
-        if(isguide){
+        if(isguide===1){
             return res.render('user_profile')
         }
         else{
@@ -255,6 +255,8 @@ exports.profile = (req,res)=> {
 
     }
     else{
+        
+        res.send("login first")
         console.log("not registered")
     }
       

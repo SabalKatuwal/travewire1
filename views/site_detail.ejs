@@ -3,7 +3,7 @@
 <div class="container-fluid whole-container">
     <h1 class="main-header"><%= site.name %> <span><button type="button" class="btn btn-light fav-btn">Favourite <i class = "fa-solid fa-heart"></i></button></span></h1>
     <h4 class="sub-header">
-        <i class="fa-solid fa-location-dot" style="color: black;"></i>  28 Kilo, Dhulikhel</h4>
+        <i class="fa-solid fa-location-dot" style="color: black;"></i>  <%=site.district %></h4>
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -41,61 +41,27 @@
 
     <h5 class="accomodate">Nearest Accomodations</h5>
 
-
+    
     <div class="row">
-        <div class="col-lg-3">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+            <% accomodations.forEach((acc) =>{ %> 
+            <div class="col-lg-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%=acc.name%></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><%=acc.location%></h6>
+                        <p class="card-text"><ul style="padding: 8%;"> <li>
+                            Contact: <%= acc.contactNo %>
+                        </li>
+                    <li>Homestay: <%= acc.isHomeStay%></li></ul> </p>
+                            <a href="<%= acc.website%>" class="card-link" target="_blank">Website</a>
+                        </div>
+                    </div>
                 </div>
+                <% })  %>
             </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
-        </div>
-    </div>
+            
+
+
 
     <h5 class="accomodate">Nearby Guides</h5>
 

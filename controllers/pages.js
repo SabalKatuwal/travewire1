@@ -51,7 +51,6 @@ exports.place_upload = (req,res)=> {
 };
 
 exports.index = (req,res)=> {
-
     db.query('SELECT * FROM site', (error, siteinfo)=>{
         if(error){
             console.log(error);
@@ -61,16 +60,15 @@ exports.index = (req,res)=> {
             // console.log(req.session.userinfo);
             const data = [];
             siteinfo.forEach(site => {
-                console.log('inside for')
+                //console.log('inside for')
                 let siteData = {}
                 siteData.site = site;
 
                 db.query('SELECT * FROM site_images where siteID = ?',[site.site_id], (error, images)=>{
-                    console.log('getting images')
+                    //console.log('getting images')
                     
-                })
-                
-                console.log('pushing site data to data');
+                })             
+                //console.log('pushing site data to data');
                 data.push(siteData)
                 
             })
@@ -90,12 +88,16 @@ exports.detail_view = (req,res)=> {
             console.log(error)
         }
         else{
-            console.log('site',site)
-            // db.query('select * from accomodations where district = ?',[site.district],(err,accomodations) => {
-            //     console.log(accomodations);
-            // })
-            console.log(site)
-            // return res.render('site_detail', {site:site[0]})
+            // console.log('site',site)
+            // console.log(site[0].district)
+            db.query('select * from accomodation where district = ?',[site[0].district],(err,accomodations) => {
+                if(err){
+                    console.log(err)
+                }
+                else{
+                   return res.render('site_detail', {site:site[0], accomodations})
+                }
+            })
         }
     })
 };
@@ -128,3 +130,19 @@ exports.contact_us = (req,res)=> {
         }
     })
 };
+
+exports.search_result = (req,res)=> {
+    const {body} = req.body
+    console.log(req.body)
+    db.query("SELECT * FROM site WHERE name LIKE '%"+ body + "%'",(error, result)=>{
+        if(error){
+            console.log(error)
+        }
+        else{
+            console.log(result[0].site_id)
+            db.query("SELECT * FROM site where site_id = ?",[result[0].site_id],(error, id)=>{
+                res.render("search_result", {site:result,id:id[0]});
+            })
+        }
+    })
+}

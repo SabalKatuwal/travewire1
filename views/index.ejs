@@ -48,8 +48,8 @@
                     <span>Travel. Life.</span>
                 </h1>
                 <p>Explore the magical places in Nepal.</p>
-                <form method="#">
-                    <input type="text" class="search-input" placeholder="Where to?">
+                <form action="/search_result" method="POST">
+                    <input type="text" class="search-input" placeholder="Where to?" name = "body">
                     <button type="submit" class="home-search-btn my-2">
                         <i class="fas fa-search"></i>
                     </button>
@@ -64,8 +64,7 @@
     <section class="blog" id="blog">
         <div class="container">
             <div class="title">
-                <h2>Latest Blog</h2>
-                <p>Recent Blogs Aubot Travel Sites by Guides</p>
+                <h2>Popular Sites</h2>
             </div>
             <div class="blog-content">
 
@@ -80,7 +79,7 @@
                                 <%= site.name %>
                             </h2>
                             <p>
-                                <%= site.description %>
+                                <%= site.description.substring(0,300) %>
                             </p>
                             <a href="/detail/<%= site.site_id%>">Read More</a>
                         </div>
