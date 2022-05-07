@@ -173,6 +173,14 @@ nav {
     margin: 2% 0 2% 0;
 }
 
+i.favourite {
+  color: red;
+}
+
+.visit-profile-btn {
+  text-decoration: none;
+}
+
 
 /* footer {
     background-color: azure;
@@ -237,3 +245,6 @@ footer {
   padding: 0 15% 0 15%;
 
 }
+
+
+

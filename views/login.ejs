@@ -1,20 +1,28 @@
-login form
-if user then one form 
-if guide then another form
+<%- include("header") -%>
 
-
-<form action= "/auth/login" method ="POST" >
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" name ="username" required>
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form-1">
+            <h3 class="login-header">Login</h3>
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Your Username" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Your Password" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="Login" />
+                </div>
+                <div class="form-group">
+                    <a href="#" class="ForgetPwd">Forget Password?</a>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 login-form-2">
+            <img src="/images/travel_boy.jpg" alt="">
+        </div>
     </div>
+</div>
 
-
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name = "password" required>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Register User</button>
-
-</form>
+<%- include("footer") -%>

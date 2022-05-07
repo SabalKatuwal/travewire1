@@ -1,4 +1,5 @@
 const express = require('express');
+const res = require('express/lib/response');
 const router = express.Router();
 
 router.get('/', (req, res)=>{
@@ -36,6 +37,16 @@ router.get('/search', (req, res)=>{
 router.get('/profile', (req, res)=>{
     console.log(req.session.username);
     res.render('user_profile');
+});
+
+router.get('/login', (req, res)=>{
+    console.log(req.session.username);
+    res.render('login');
+});
+
+router.get('/search', (req, res)=>{
+    const { term } = req.query;
+    
 });
 
 

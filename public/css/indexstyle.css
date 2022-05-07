@@ -5,7 +5,8 @@
     --Quicksand: "Poppins", sans-serif;
     --Roboto: 'Roboto', sans-serif;
     --dark: #3c393d;
-    --exDark: #2b2b2b;
+    /* --exDark: #2b2b2b; */
+    --exDark: paleturquoise;
 }
 /* *{
     padding: 0;
@@ -29,7 +30,7 @@ img{
  
 header{
     min-height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/banner-bg.jpg) center/cover no-repeat fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/Nepal-bg-1.webp') center/cover no-repeat fixed;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
@@ -86,6 +87,10 @@ header{
     background: transparent;
     outline: 0;
     cursor: pointer;
+}
+
+.search-symb:hover {
+    color: paleturquoise;
 }
 
 /* .search-btn {
