@@ -8,7 +8,7 @@ const path = require('path')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, path.join(__dirname,'../my_uploads'))
+      cb(null, path.join(__dirname,'../public/my_uploads'))
     },
     filename: function (req, file, cb) {
         console.log('file = ',file);
@@ -33,6 +33,7 @@ router.get('/place_upload', (req, res)=>{
 
     
 router.get('/return_places', pageController.return_places);
+// router.get('/return_coordinates', pageController.return_coordinates);
 
 router.get('/about_us', (req, res)=>{
     return res.render("about")

@@ -71,7 +71,7 @@ app.use('/auth', require('./routes/auth'))  //'/auth' paxi aako url yeta janxa
 
 
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8000;
 app.listen(port, ()=>{console.log(`listening on port ${port}`)});
 
 

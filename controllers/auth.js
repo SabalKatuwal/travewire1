@@ -244,19 +244,21 @@ exports.guide_login = (req, res)=>{
 
 exports.profile = (req,res)=> {
     console.log(req.session)
-    let isguide = req.session.userinfo.isGuide
-    if(req.session){
-        if(isguide===1){
-            return res.render('user_profile')
+    if(req.session.userinfo){
+        let isguide = req.session.userinfo.isGuide
+        if(isguide){
+            db.query("select * from guide where userID = ?",[req.session.userinfo.user_id],(error, guideinfo)=>{
+                // console.log(combined)
+                return res.render('user_profile',{session:req.session.userinfo, guideinfo:guideinfo[0]})
+            })
         }
         else{
-            return res.render('tourist_profile')
+            
+            return res.render('tourist_profile',{session:req.session.userinfo})
         }
-
     }
     else{
-        
-        res.send("login first")
+        res.redirect("/auth/login")
         console.log("not registered")
     }
       

@@ -10,7 +10,11 @@ const { render } = require('express/lib/response');
 
 
 router.get('/login', (req, res)=>{
-    res.render('login.ejs');
+    if(!req.session.userinfo){
+        return res.render('login.ejs');
+    }
+    res.redirect('/')
+    
 });
 router.get('/guide_login', (req, res)=>{
     res.render('guide_login.ejs');
@@ -21,15 +25,17 @@ router.get('/guide_register', (req, res)=>{
 });
 
 router.get('/tourist_register', (req, res)=>{
-    res.render('tourist_register');
+    if(!req.session.userinfo){
+        return res.render('tourist_register');
+    }
+    res.redirect('/')
 });
 
 
 router.get('/logout', authController.logout)
 
 
-router.get('/profile',authController.profile)//(req,res)=>{
-    //res.render('user_profile')
+router.get('/profile',authController.profile)
 
 /*
     POST Method here
